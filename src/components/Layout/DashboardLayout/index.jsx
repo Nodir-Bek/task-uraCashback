@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../../NavBars/DashboardNavbar';
 import { Container, Content, Root } from '../style';
-import { Wrapper, Main } from './style';
+import { Wrapper } from './style';
 import Sidebar from '../../Sidebar';
 
 const DashboardLayout = () => {

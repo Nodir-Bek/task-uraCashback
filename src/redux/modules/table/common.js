@@ -58,8 +58,8 @@ export const productsHeader = [
   },
   {
     id: 4,
-    Header: 'Active',
-    accessor: 'active',
+    Header: 'Description',
+    accessor: 'description',
     show: true,
   },
 ];

@@ -14,7 +14,6 @@ import {
   Typography,
 } from '@mui/material';
 import InputMask from 'react-input-mask';
-import auth from '../../../services/auth';
 import { setAuthData } from '../../../redux/modules/auth/actions';
 
 const Register = () => {
@@ -25,8 +24,7 @@ const Register = () => {
 
   const handleRegister = (e, phone) => {
     e.preventDefault();
-    // const data = new URLSearchParams();
-    // data.append('phoneNumber', phone.match(numberPattern).join('').slice(0));
+
     const data = {
       phoneNumber: phone.match(numberPattern).join('').slice(0),
     };

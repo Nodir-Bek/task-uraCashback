@@ -1,10 +1,8 @@
 import React from 'react';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { IconButton } from '@mui/material';
 import Fade from '@mui/material/Fade';
-import LanguageIcon from '@mui/icons-material/Language';
 import i18next from 'i18next';
 import { useDispatch } from 'react-redux';
 import { langs } from './helper';

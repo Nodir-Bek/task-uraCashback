@@ -5,11 +5,13 @@ import service from '../../../services/products';
 import { dataSelector } from './selectors';
 
 function* fetchData({ payload }) {
+  // console.log('saga payload', payload);
   try {
     if (payload && payload.isSearch) yield delay(500);
     yield put(setLoading(true));
-    const res = yield service.getAll(payload && payload.query);
+    const res = yield service.getAll(payload && payload.id);
     const { data, total } = dataSelector(res);
+    console.log('item id', data);
     yield put(setError(''));
     yield put(setData(data));
     yield put(setTotal(total));

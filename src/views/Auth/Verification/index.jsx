@@ -5,10 +5,8 @@ import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Button, Typography, TextField } from '@mui/material';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import OtpInput from 'react-otp-input';
 import CountdownTimer from '../../../components/FormElements/CountDown';
 import { startTimer } from '../../../redux/modules/countDownTimer/action';
-import { setToken } from '../../../redux/modules/auth/actions';
 
 const Verify = () => {
   const navigate = useNavigate();

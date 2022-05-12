@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar, Box, Button, Typography } from '@mui/material';
+import { AppBar, Toolbar, Box, Typography } from '@mui/material';
 import Logo from '../../Logo';
 
 const MainNavbar = ({ ...rest }) => (

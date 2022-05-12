@@ -7,14 +7,6 @@ import Item from './Item';
 import ActiveIcon from '../Icons/ActiveIcon';
 import Logo from '../Logo';
 
-const style = {
-  width: '75.31px',
-  height: '24.97px',
-  fontSize: '25px',
-  fontStyle: 'normal',
-  fontWeight: 500,
-};
-
 const Sidebar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
   const sideMenuItems = [

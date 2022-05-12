@@ -9,9 +9,6 @@ import {
   IconButton,
   Toolbar,
   Typography,
-  Menu,
-  MenuItem,
-  makeStyles,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/NotificationsOutlined';
@@ -21,7 +18,7 @@ import SelectLanguageBtn from '../../Language';
 
 const Navbar = ({ onMobileNavOpen, ...rest }) => {
   const [notifications] = useState([]);
-  const [anchorElNav, setAnchorElNav] = useState(null);
+  // const [anchorElNav, setAnchorElNav] = useState(null);
 
   return (
     <AppBar
@@ -101,7 +98,6 @@ const Navbar = ({ onMobileNavOpen, ...rest }) => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <SelectLanguageBtn />
         </Hidden>
         <Hidden lgUp>
           <IconButton onClick={onMobileNavOpen} size="large">

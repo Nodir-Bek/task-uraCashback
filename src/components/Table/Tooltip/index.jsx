@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
-import { MoreHorizontal } from 'react-feather';
 import { useDispatch } from 'react-redux';
 import { ClickOutside } from '../../../hooks/click-outside';
 import { Button, OptionButton, ToolTip } from './style';

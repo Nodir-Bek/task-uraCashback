@@ -5,15 +5,16 @@ import {
   Button,
   Card,
   Container,
+  FormControl,
   InputAdornment,
   SvgIcon,
   TextField,
   Typography,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { AddCircleOutline as Add } from '@mui/icons-material';
-import { AnimatePresence } from 'framer-motion';
 import {
   Sliders as FilterIcon,
   Search as SearchIcon,
@@ -34,33 +35,43 @@ const Products = ({ ...rest }) => {
   const { id } = useParams();
   const { state } = useLocation();
   const [isShow, setIsShow] = useState(false);
-  const [dataTable, setDataTable] = useState([]);
-  const { search, status, setSearch, setStatus, handleOnTableChange } =
-    useQuery({ fetchData });
+  const [search, setSearch] = useState('');
+  const [sort, setSort] = useState('');
+
+  const { handleOnTableChange } = useQuery({ fetchData, state, id });
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   useEffect(() => {
     products
       .getAll(id)
       .then((res) => {
-        dispatch(setData(res.items));
+        const tableData = [...res.items];
+        console.log('sdjasndjsd', tableData);
+        dispatch(setData(tableData));
       })
       .catch((err) => console.log(err));
+    setSort('a-z');
   }, []);
-  const { data, total, loading } = useSelector(
-    (state) => state.productsReducer
-  );
+  const { data, total } = useSelector((state) => state.productsReducer);
   const headers = useMemo(() => headerMaker(productsHeader), [productsHeader]);
 
   const filtertedProducts = useMemo(() => {
     if (!search) {
       return data;
     }
+    if (sort === 'a-z') {
+      return data.sort((a, b) =>
+        a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
+      );
+    }
+    if (sort === 'z-a') {
+      return data.sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1
+      );
+    }
     return data.filter((data) =>
       data.name.toLowerCase().includes(search.toLowerCase())
     );
-  }, [search, data]);
-  console.log('data', data);
+  }, [search, data, sort]);
   return (
     <>
       <Helmet>
@@ -117,6 +128,21 @@ const Products = ({ ...rest }) => {
                   placeholder="Search product"
                   variant="outlined"
                 />
+                <FormControl
+                  sx={{
+                    ml: 4,
+                  }}
+                >
+                  <Select
+                    id="demo-simple-select"
+                    value={sort}
+                    size="small"
+                    onChange={(e) => setSort(e.target.value)}
+                  >
+                    <MenuItem value="a-z">A-Z</MenuItem>
+                    <MenuItem value="z-a">Z-A</MenuItem>
+                  </Select>
+                </FormControl>
               </Box>
             </div>
           </div>
@@ -136,7 +162,6 @@ const Products = ({ ...rest }) => {
             >
               Export
             </Button>
-
             <Button
               onClick={() => setIsShow(!isShow)}
               startIcon={
@@ -174,8 +199,7 @@ const Products = ({ ...rest }) => {
                   headers={headers}
                   toolTips={toolTips}
                   total={total}
-                  // onChange={handleOnTableChange}
-                  onChange={() => {}}
+                  onChange={handleOnTableChange}
                 />
               </Card>
             </div>

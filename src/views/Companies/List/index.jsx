@@ -5,15 +5,16 @@ import {
   Button,
   Card,
   Container,
+  FormControl,
   InputAdornment,
+  MenuItem,
+  Select,
   SvgIcon,
   TextField,
   Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { AddCircleOutline as Add } from '@mui/icons-material';
-import { AnimatePresence } from 'framer-motion';
 import {
   Sliders as FilterIcon,
   Search as SearchIcon,
@@ -32,25 +33,42 @@ import { useQuery } from '../../useQuery';
 const Companies = ({ ...rest }) => {
   const classes = useStyles();
   const [isShow, setIsShow] = useState(false);
-  //   const [search, setSearch] = useState('');
-  const { search, status, setSearch, setStatus, handleOnTableChange } =
-    useQuery({ fetchData });
+  const [search, setSearch] = useState('');
+  const [sort, setSort] = useState('');
+  const { handleOnTableChange } = useQuery({ fetchData });
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   useEffect(() => {
     companies
       .getAll()
       .then((res) => dispatch(setData(res.items)))
       .catch((err) => console.log(err));
+    setSort('a-z');
   }, []);
-  const { data, total, loading } = useSelector(
-    (state) => state.companiesReducer
-  );
+
+  const { data, total } = useSelector((state) => state.companiesReducer);
   const headers = useMemo(
     () => headerMaker(companiesHeader),
     [companiesHeader]
   );
-  console.log('data', data);
+  const filtertedProducts = useMemo(() => {
+    if (!search) {
+      return data;
+    }
+    if (sort === 'a-z') {
+      return data.sort((a, b) =>
+        a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
+      );
+    }
+    if (sort === 'z-a') {
+      return data.sort((a, b) =>
+        a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1
+      );
+    }
+    return data.filter((data) =>
+      data.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search, data, sort]);
+
   return (
     <>
       <Helmet>
@@ -107,65 +125,33 @@ const Companies = ({ ...rest }) => {
                   placeholder="Search product"
                   variant="outlined"
                 />
+                <FormControl
+                  sx={{
+                    ml: 4,
+                  }}
+                >
+                  <Select
+                    id="demo-simple-select"
+                    value={sort}
+                    size="small"
+                    onChange={(e) => setSort(e.target.value)}
+                  >
+                    <MenuItem value="a-z">A-Z</MenuItem>
+                    <MenuItem value="z-a">Z-A</MenuItem>
+                  </Select>
+                </FormControl>
               </Box>
             </div>
-          </div>
-          <div className={classes.topBtns}>
-            <Button
-              disabled={true}
-              main="true"
-              startIcon={<ExportIcon />}
-              sx={{
-                backgroundColor: '#EAEAEA',
-                width: 111,
-                border: '1px solid #D5D5D5',
-                borderRadius: '6px',
-                height: 40,
-                color: '#000',
-              }}
-            >
-              Export
-            </Button>
-
-            <Button
-              onClick={() => setIsShow(!isShow)}
-              startIcon={
-                <FilterIcon
-                  style={{
-                    marginLeft: 5,
-                  }}
-                />
-              }
-              endIcon={
-                <DownIcon
-                  style={{
-                    marginRight: 5,
-                  }}
-                />
-              }
-              sx={{
-                backgroundColor: '#fff',
-                color: '#000',
-
-                border: '1px solid rgba(47, 46, 46, 0.2)',
-                // width: 111,
-                height: 40,
-                borderRadius: '8px',
-              }}
-            >
-              Filter
-            </Button>
           </div>
           <Box sx={{ pt: 5 }}>
             <div className={classes.root}>
               <Card {...rest}>
                 <Table
-                  data={data}
+                  data={filtertedProducts}
                   headers={headers}
                   toolTips={toolTips}
                   total={total}
-                  // onChange={handleOnTableChange}
-                  onChange={() => {}}
+                  onChange={handleOnTableChange}
                 />
               </Card>
             </div>

@@ -3,25 +3,20 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import {
   Box,
   Button,
   Container,
   TextField,
   Typography,
-  Stack,
   Link,
-  Alert,
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import auth from '../../../services/auth';
-import { setToken } from '../../../redux/modules/auth/actions';
 import { useStyles } from './style';
 
 const Login = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const schema = Yup.object().shape({
     login: Yup.string().required('Login is  required'),
@@ -41,9 +36,9 @@ const Login = () => {
     },
   });
 
-  const handleForgot = () => {
-    navigate('/sign-up');
-  };
+  // const handleForgot = () => {
+  //   navigate('/sign-up');
+  // };
   return (
     <>
       <Helmet>

@@ -1,29 +1,13 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-export function useQuery({ fetchData }) {
+export function useQuery({ fetchData, state, id }) {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.langsReducer.language);
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('');
   const [pageSize, setPageSize] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
-  const [categoryId, setCategoryId] = useState('');
-  const [subCategoryId, setSubCategoryId] = useState('');
-
-  const statusQuery = useMemo(
-    () => (status ? `&status=${status}` : ''),
-    [status]
-  );
-
-  const categoryQuery = useMemo(
-    () => (categoryId ? `&category_id=${categoryId}` : ''),
-    [categoryId]
-  );
-  const subCategoryQuery = useMemo(
-    () => (subCategoryId ? `&subcategory_id=${subCategoryId}` : ''),
-    [subCategoryId]
-  );
 
   const pageSizeQuery = useMemo(
     () => (pageSize ? `&size=${pageSize}` : ''),
@@ -36,9 +20,8 @@ export function useQuery({ fetchData }) {
   );
 
   const query = useMemo(
-    () =>
-      `${pageQuery}${pageSizeQuery}${statusQuery}${categoryQuery}${subCategoryQuery}`,
-    [pageQuery, pageSizeQuery, statusQuery, categoryQuery, subCategoryQuery]
+    () => `${pageQuery}${pageSizeQuery}`,
+    [pageQuery, pageSizeQuery]
   );
 
   const handleOnTableChange = ({ pageIndex, pageSize }) => {
@@ -51,6 +34,7 @@ export function useQuery({ fetchData }) {
       fetchData({
         lng: language,
         isSearch: true,
+        id,
         query: `${query}${search ? '&search=' + search : ''}`,
       })
     );
@@ -63,6 +47,7 @@ export function useQuery({ fetchData }) {
         fetchData({
           lng: language,
           isSearch: false,
+          id,
           query: `${query}${search ? `&search=${search}` : ''}`,
         })
       );
@@ -76,12 +61,8 @@ export function useQuery({ fetchData }) {
     status,
     pageIndex,
     pageSize,
-    categoryId,
-    subCategoryId,
     setSearch,
     setStatus,
-    setCategoryId,
-    setSubCategoryId,
     handleOnTableChange,
   };
 }

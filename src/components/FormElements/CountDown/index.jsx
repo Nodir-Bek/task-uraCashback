@@ -41,13 +41,13 @@ export default function CountdownTimer() {
   const handleStart = () => {
     setStatus(STATUS.STARTED);
   };
-  const handleStop = () => {
-    setStatus(STATUS.STOPPED);
-  };
-  const handleReset = () => {
-    setStatus(STATUS.STOPPED);
-    setSecondsRemaining(INITIAL_COUNT);
-  };
+  // const handleStop = () => {
+  //   setStatus(STATUS.STOPPED);
+  // };
+  // const handleReset = () => {
+  //   setStatus(STATUS.STOPPED);
+  //   setSecondsRemaining(INITIAL_COUNT);
+  // };
   useEffect(() => {
     handleStart();
   }, []);
