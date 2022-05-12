@@ -2,7 +2,6 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import {
   Box,
-  Button,
   Card,
   Container,
   FormControl,
@@ -13,14 +12,8 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  Sliders as FilterIcon,
-  Search as SearchIcon,
-  ArrowDown as ExportIcon,
-  ChevronDown as DownIcon,
-} from 'react-feather';
+import { Search as SearchIcon } from 'react-feather';
 import { toolTips } from './helper';
 import { useStyles } from './style';
 import companies from '../../../services/companies';
@@ -32,7 +25,6 @@ import { useQuery } from '../../useQuery';
 
 const Companies = ({ ...rest }) => {
   const classes = useStyles();
-  const [isShow, setIsShow] = useState(false);
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('');
   const { handleOnTableChange } = useQuery({ fetchData });

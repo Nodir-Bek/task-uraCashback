@@ -13,7 +13,7 @@ import {
   Select,
   MenuItem,
 } from '@mui/material';
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Sliders as FilterIcon,

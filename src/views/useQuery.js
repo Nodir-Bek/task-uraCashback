@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 export function useQuery({ fetchData, state, id }) {

@@ -14,7 +14,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/NotificationsOutlined';
 // import InputIcon from '@mui/icons-material/Input';
 import Logo from '../../Logo';
-import SelectLanguageBtn from '../../Language';
 
 const Navbar = ({ onMobileNavOpen, ...rest }) => {
   const [notifications] = useState([]);

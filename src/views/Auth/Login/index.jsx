@@ -12,7 +12,6 @@ import {
   Typography,
   Link,
 } from '@mui/material';
-import { useDispatch } from 'react-redux';
 import { useStyles } from './style';
 
 const Login = () => {

@@ -46,6 +46,7 @@ export default ({
   const [selectedRows, setSelectedRows] = useState({});
   const [indexT, setIndexT] = useState(-1);
   const [pgCount, setPgCount] = useState(0);
+  console.log(selectedRows);
   const {
     getTableProps,
     getTableBodyProps,
