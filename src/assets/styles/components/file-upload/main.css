@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.custom-file-preview::-webkit-scrollbar {
+  width: 0.9rem !important;
+  height: 5px;
+  border-radius: 5px;
+}
+
+.custom-file-preview::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+.custom-file-preview::-webkit-scrollbar-thumb {
+  background-color: blue !important;
+  outline: 1px solid #0f0ffa65 !important;
+}
+
+.file-upload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  max-height: 300px;
+  position: relative;
+  /*margin-top: 2rem;*/
+}
+
+.file-upload h1 {
+  font-size: 1.5rem;
+  color: #333;
+  position: relative;
+  padding-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.file-upload p {
+  font-size: 0.875rem;
+  color: #ddd;
+  margin-bottom: 0.5rem;
+}
+
+.custom-form-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 0.875rem;
+}
+
+.custom-form-group input {
+  padding: 0.875rem 1rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  color: #333;
+  outline: none;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  font-size: 0.875rem;
+}
+
+.custom-form-group input:focus {
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-file-drop-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border: 2px dashed #ddd;
+  min-height: 300px;
+  cursor: grab;
+}
+
+.custom-file-drop-area .clickBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.2rem;
+  color: #3333;
+  text-transform: uppercase;
+  font-weight: bold;
+  outline: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.custom-file-drop-area .clickBtn:hover {
+  text-decoration: underline;
+}
+
+.custom-file-drop-area input {
+  display: none;
+}
+
+.custom-file-drop-area.highlight {
+  border-color: blue;
+}
+
+.custom-file-drop-area.highlight .clickBtn {
+  color: blue;
+}
+
+/*  one image preview  */
+.oneImage-preview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-height: 300px;
+  min-height: 300px;
+  border: 1px solid #f7f8fa;
+  background-color: #f7f8fa;
+}
+.one-prev-img {
+  width: 100%;
+  height: 300px;
+  display: block;
+  border-radius: 6px;
+
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.oneImage-preview .one-prev-img .one-delIcon {
+  outline: none;
+  position: absolute;
+  top: 25px;
+  right: 17px;
+  /* -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
+  z-index: 2;
+  cursor: pointer;
+  color: #fff;
+  font-size: 0.9rem;
+  /*padding-bottom: 0.1rem;*/
+  width: 25px;
+  height: 25px;
+  /* background-color: #fff; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 50px;
+  display: none;
+}
+
+.oneImage-preview:hover .one-delIcon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.oneImage-preview .one-prev-img:hover .one-prev-img img {
+  opacity: 0.8;
+}
+.oneImage-preview .one-prev-img img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+}
+
+/* multi image preview */
+.custom-file-preview {
+  /*display: -ms-grid;*/
+  /*display: grid;*/
+  /*!*-ms-grid-columns: (minmax(100px, 1fr)) [ auto-fill ];*!*/
+  /*grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));*/
+  /*grid-row: 100px;*/
+  display: flex;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+  margin-top: 1rem;
+  gap: 10px;
+}
+.scroll-x {
+  overflow-x: scroll;
+}
+.custom-file-preview .prev-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 100px;
+  max-height: 100px;
+  min-width: 100px;
+  min-height: 100px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.custom-file-preview .prev-img .delIcon {
+  outline: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  cursor: pointer;
+  color: #333;
+  font-size: 0.9rem;
+  /*padding-bottom: 0.1rem;*/
+  width: 25px;
+  height: 25px;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 50px;
+  display: none;
+}
+
+.custom-file-preview .prev-img img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+.custom-file-preview .prev-img:hover .delIcon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.custom-file-preview .prev-img:hover::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
