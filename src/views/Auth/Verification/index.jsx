@@ -39,24 +39,19 @@ const Verify = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new URLSearchParams();
-    data.append(
-      'phoneNumber',
-      Number(phone.match(numberPattern).join('').slice(0))
-    );
-    data.append('code', verifyCode * 1);
-    console.log('x-form data', data);
+    data.append('phoneNumber', phone.match(numberPattern).join('').slice(0));
+    data.append('code', verifyCode);
     if (verifyCode) {
       axios
         .post(`${baseURL}/security/verify-login`, data, {
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
         })
         .then((res) => {
           if (res.data) {
             localStorage.setItem('token', res.data.token);
             // dispatch(setToken(res.data.token));
-            toast.succes('user successfully verified!');
             navigate('/');
             dispatch(startTimer(false));
           }
@@ -79,8 +74,8 @@ const Verify = () => {
         alignItems: 'center',
       }}
     >
-      <form
-        style={{
+      <Box
+        sx={{
           backgroundColor: '#fff',
           display: 'flex',
           flexDirection: 'column',
@@ -156,7 +151,7 @@ const Verify = () => {
         <Button type="button" onClick={() => navigate('/sign-up')}>
           Back
         </Button>
-      </form>
+      </Box>
     </Box>
   );
 };

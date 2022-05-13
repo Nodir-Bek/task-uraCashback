@@ -34,7 +34,7 @@ const Companies = ({ ...rest }) => {
       .getAll()
       .then((res) => dispatch(setData(res.items)))
       .catch((err) => console.log(err));
-    setSort('a-z');
+    // setSort('a-z');
   }, []);
 
   const { data, total } = useSelector((state) => state.companiesReducer);
@@ -43,8 +43,10 @@ const Companies = ({ ...rest }) => {
     [companiesHeader]
   );
   const filtertedProducts = useMemo(() => {
-    if (!search) {
-      return data;
+    if (search) {
+      return data.filter((data) =>
+        data.name.toLowerCase().includes(search.toLowerCase())
+      );
     }
     if (sort === 'a-z') {
       return data.sort((a, b) =>
@@ -56,9 +58,7 @@ const Companies = ({ ...rest }) => {
         a.name.toLowerCase() > b.name.toLowerCase() ? -1 : 1
       );
     }
-    return data.filter((data) =>
-      data.name.toLowerCase().includes(search.toLowerCase())
-    );
+    return data;
   }, [search, data, sort]);
 
   return (

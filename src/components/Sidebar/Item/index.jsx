@@ -1,12 +1,18 @@
 import React from 'react';
-import { NavLink as RouterLink, useLocation } from 'react-router-dom';
+import {
+  NavLink as RouterLink,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, ListItem } from '@mui/material';
 
 const NavItem = ({ href, icon: Icon, title, logout, subitems, ...rest }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const handleLogOut = () => {
     localStorage.removeItem('token');
+    navigate('/');
   };
 
   const active = location.pathname.startsWith(href);
